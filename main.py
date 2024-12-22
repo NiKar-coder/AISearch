@@ -1,27 +1,19 @@
-from selenium.webdriver import Firefox
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.by import By
-import time
+from mainWindow import MainWindow
+from PyQt6.QtWidgets import QApplication
+import qdarktheme
+import sys
 
 
-firefox_options = Options()
-
-firefox_options.add_argument("--headless")
-
-
-driver = Firefox(options=firefox_options)
-driver.get("https://chatgptchatapp.com/")
-time.sleep(1)
-prompt = driver.find_element(By.ID, "chat-input")
-prompt.send_keys("dog")
-BTN_SEND_MESSAGE = driver.find_element(By.CLASS_NAME, "btn-send-message-svg")
-driver.execute_script(
-    "arguments[0].style.display = 'inline';", BTN_SEND_MESSAGE)
-BTN_SEND_MESSAGE.click()
-time.sleep(3)
-
-ans = driver.find_element(By.CLASS_NAME, 'message-completed').text
-print(ans)
+def except_hook(cls, exception, traceback):
+    sys.__excepthook__(cls, exception, traceback)
 
 
-driver.close()
+if __name__ == '__main__':
+    qdarktheme.enable_hi_dpi()
+    app = QApplication(sys.argv)
+    qdarktheme.setup_theme("dark", corner_shape="sharp",
+                           custom_colors={"primary": "#FFFFFF"})
+    mainWindow = MainWindow()
+    mainWindow.show()
+    sys.excepthook = except_hook
+    sys.exit(app.exec())
