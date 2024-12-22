@@ -1,8 +1,6 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
-import os
 import time
 
 
@@ -12,8 +10,7 @@ class AI:
 
         firefox_options.add_argument("--headless")
 
-        self.driver = Firefox(service=Service(
-            executable_path=f"{os.path.dirname(os.path.abspath(__file__))}/driver/geckodriver"), options=firefox_options)
+        self.driver = Firefox(options=firefox_options)
 
     def ask(self, text):
         self.driver.get("https://chatgptchatapp.com/")
