@@ -3,3 +3,4 @@ AISearch
 __pycache__
 AISearch.spec
 build
+dist

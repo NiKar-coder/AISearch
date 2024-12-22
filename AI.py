@@ -29,4 +29,5 @@ class AI:
         time.sleep(20)
 
         ans = self.driver.find_element(By.CLASS_NAME, 'message-completed').text
+        self.driver.close()
         return ans
