@@ -1,19 +1,19 @@
-from mainWindow import MainWindow
-from PyQt6.QtWidgets import QApplication
-import qdarktheme
-import sys
+from AI import AI
+import asyncio
+from colorama import init, Fore, Style, Back
 
 
-def except_hook(cls, exception, traceback):
-    sys.__excepthook__(cls, exception, traceback)
+init(autoreset=True)
 
 
-if __name__ == '__main__':
-    qdarktheme.enable_hi_dpi()
-    app = QApplication(sys.argv)
-    qdarktheme.setup_theme("dark", corner_shape="sharp",
-                           custom_colors={"primary": "#FFFFFF"})
-    mainWindow = MainWindow()
-    mainWindow.show()
-    sys.excepthook = except_hook
-    sys.exit(app.exec())
+async def set_answer():
+    print("You:", end=" ")
+    question = input()
+    print(Back.BLACK + Style.DIM + "\nPlease wait...\n")
+    ai = AI()
+    await ai.ask(question)
+    print("  " + Back.BLACK + Style.BRIGHT + Fore.LIGHTGREEN_EX + ai.ans)
+
+
+if __name__ == "__main__":
+    asyncio.run(set_answer())

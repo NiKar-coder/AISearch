@@ -1,7 +1,7 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
-import time
+import asyncio
 
 
 class AI:
@@ -12,9 +12,9 @@ class AI:
 
         self.driver = Firefox(options=firefox_options)
 
-    def ask(self, text):
+    async def ask(self, text):
         self.driver.get("https://chatgptchatapp.com/")
-        time.sleep(3)
+        await asyncio.sleep(3)
         prompt = self.driver.find_element(By.ID, "chat-input")
         prompt.send_keys(text)
         BTN_SEND_MESSAGE = self.driver.find_element(
@@ -23,8 +23,7 @@ class AI:
             "arguments[0].style.display = 'inline';", BTN_SEND_MESSAGE)
         BTN_SEND_MESSAGE.click()
 
-        time.sleep(20)
+        await asyncio.sleep(20)
 
-        ans = self.driver.find_element(By.CLASS_NAME, 'message-completed').text
+        self.ans = self.driver.find_element(By.CLASS_NAME, 'message-completed').text
         self.driver.close()
-        return ans
