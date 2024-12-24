@@ -1,7 +1,7 @@
 from AI import AI
 import asyncio
 from colorama import init, Fore, Style, Back
-
+import sys
 
 init(autoreset=True)
 
@@ -11,7 +11,7 @@ async def main():
     question = input()
     print("")
     if question == "EXIT":
-        exit(0)
+        sys.exit(0)
     print(Back.BLACK + Style.DIM + "Please wait...", end="\n\n")
     ai = AI()
     await ai.ask(question)
