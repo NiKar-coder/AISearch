@@ -6,6 +6,7 @@ import asyncio
 
 class AI:
     def __init__(self):
+        self.ans = None
         firefox_options = Options()
 
         firefox_options.add_argument("--headless")
@@ -25,5 +26,6 @@ class AI:
 
         await asyncio.sleep(20)
 
-        self.ans = self.driver.find_element(By.CLASS_NAME, 'message-completed').text
+        self.ans = self.driver.find_element(
+            By.CLASS_NAME, 'message-completed').text
         self.driver.close()
